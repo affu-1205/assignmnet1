@@ -1,0 +1,58 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.0.2'
+	id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'com.Order.Book'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('springCloudVersion', "2022.0.1")
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.h2database:h2'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'javax.validation:validation-api:2.0.1.Final'
+    implementation 'org.mapstruct:mapstruct:1.5.2.Final'
+    //implementation 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
+    implementation 'org.apache.logging.log4j:log4j-api:2.18.0'
+    implementation 'org.apache.logging.log4j:log4j-core:2.18.0'
+    implementation 'org.slf4j:slf4j-api:1.7.36' 
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.6'
+    implementation 'io.cucumber:cucumber-java:6.8.0'
+    testImplementation 'io.cucumber:cucumber-junit:6.8.0'
+    implementation 'io.cucumber:cucumber-spring:6.8.0'
+    testImplementation ('io.rest-assured:rest-assured:4.5.1')
+    {
+    exclude group: 'org.apache.groovy', module: 'groovy-xml'
+    }
+    testImplementation 'io.rest-assured:rest-assured-all:4.5.1' 
+        
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    
+    implementation 'org.springdoc:springdoc-openapi-ui:1.4.3'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
